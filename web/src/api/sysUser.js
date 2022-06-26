@@ -29,7 +29,7 @@ export const captcha = (data) => {
 // @Router /base/resige [post]
 export const register = (data) => {
   return service({
-    url: '/user/admin_register',
+    url: '/staff/admin_register',
     method: 'post',
     data: data
   })
@@ -38,10 +38,10 @@ export const register = (data) => {
 // @Summary 修改密码
 // @Produce  application/json
 // @Param data body {username:"string",password:"string",newPassword:"string"}
-// @Router /user/changePassword [post]
+// @Router /staff/changePassword [post]
 export const changePassword = (data) => {
   return service({
-    url: '/user/changePassword',
+    url: '/staff/changePassword',
     method: 'post',
     data: data
   })
@@ -54,10 +54,10 @@ export const changePassword = (data) => {
 // @Produce application/json
 // @Param data body modelInterface.PageInfo true "分页获取用户列表"
 // @Success 200 {string} json "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /user/getUserList [post]
+// @Router /staff/getUserList [post]
 export const getUserList = (data) => {
   return service({
-    url: '/user/getUserList',
+    url: '/staff/getUserList',
     method: 'post',
     data: data
   })
@@ -70,10 +70,10 @@ export const getUserList = (data) => {
 // @Produce application/json
 // @Param data body api.SetUserAuth true "设置用户权限"
 // @Success 200 {string} json "{"success":true,"data":{},"msg":"修改成功"}"
-// @Router /user/setUserAuthority [post]
+// @Router /staff/setUserAuthority [post]
 export const setUserAuthority = (data) => {
   return service({
-    url: '/user/setUserAuthority',
+    url: '/staff/setUserAuthority',
     method: 'post',
     data: data
   })
@@ -86,10 +86,10 @@ export const setUserAuthority = (data) => {
 // @Produce application/json
 // @Param data body request.SetUserAuth true "删除用户"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
-// @Router /user/deleteUser [delete]
+// @Router /staff/deleteUser [delete]
 export const deleteUser = (data) => {
   return service({
-    url: '/user/deleteUser',
+    url: '/staff/deleteUser',
     method: 'delete',
     data: data
   })
@@ -102,10 +102,10 @@ export const deleteUser = (data) => {
 // @Produce application/json
 // @Param data body model.SysUser true "设置用户信息"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
-// @Router /user/setUserInfo [put]
+// @Router /staff/setUserInfo [put]
 export const setUserInfo = (data) => {
   return service({
-    url: '/user/setUserInfo',
+    url: '/staff/setUserInfo',
     method: 'put',
     data: data
   })
@@ -118,10 +118,10 @@ export const setUserInfo = (data) => {
 // @Produce application/json
 // @Param data body model.SysUser true "设置用户信息"
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
-// @Router /user/setSelfInfo [put]
+// @Router /staff/setSelfInfo [put]
 export const setSelfInfo = (data) => {
   return service({
-    url: '/user/setSelfInfo',
+    url: '/staff/setSelfInfo',
     method: 'put',
     data: data
   })
@@ -134,10 +134,10 @@ export const setSelfInfo = (data) => {
 // @Produce application/json
 // @Param data body api.setUserAuthorities true "设置用户权限"
 // @Success 200 {string} json "{"success":true,"data":{},"msg":"修改成功"}"
-// @Router /user/setUserAuthorities [post]
+// @Router /staff/setUserAuthorities [post]
 export const setUserAuthorities = (data) => {
   return service({
-    url: '/user/setUserAuthorities',
+    url: '/staff/setUserAuthorities',
     method: 'post',
     data: data
   })
@@ -149,17 +149,17 @@ export const setUserAuthorities = (data) => {
 // @accept application/json
 // @Produce application/json
 // @Success 200 {string} json "{"success":true,"data":{},"msg":"获取成功"}"
-// @Router /user/getUserInfo [get]
+// @Router /staff/getUserInfo [get]
 export const getUserInfo = () => {
   return service({
-    url: '/user/getUserInfo',
+    url: '/staff/getUserInfo',
     method: 'get'
   })
 }
 
 export const resetPassword = (data) => {
   return service({
-    url: '/user/resetPassword',
+    url: '/staff/resetPassword',
     method: 'post',
     data: data
   })

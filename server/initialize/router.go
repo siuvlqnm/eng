@@ -8,7 +8,7 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/middleware"
 	"github.com/flipped-aurora/gin-vue-admin/server/router"
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/gin-swagger"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
@@ -55,7 +55,7 @@ func Routers() *gin.Engine {
 	{
 		systemRouter.InitApiRouter(PrivateGroup)                 // 注册功能api路由
 		systemRouter.InitJwtRouter(PrivateGroup)                 // jwt相关路由
-		systemRouter.InitUserRouter(PrivateGroup)                // 注册用户路由
+		systemRouter.InitSysUserRouter(PrivateGroup)             // 注册用户路由
 		systemRouter.InitMenuRouter(PrivateGroup)                // 注册menu路由
 		systemRouter.InitSystemRouter(PrivateGroup)              // system相关路由
 		systemRouter.InitCasbinRouter(PrivateGroup)              // 权限相关路由
