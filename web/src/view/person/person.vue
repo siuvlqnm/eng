@@ -232,7 +232,7 @@ export default {
 
 <script setup>
 import ChooseImg from '@/components/chooseImg/index.vue'
-import { setSelfInfo, changePassword } from '@/api/user.js'
+import { setSelfInfo, changePassword } from '@/api/sysUser.js'
 import { reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/pinia/modules/user'

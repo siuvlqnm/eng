@@ -115,7 +115,7 @@ export default {
 </script>
 
 <script setup>
-import { captcha } from '@/api/user'
+import { captcha } from '@/api/sysUser'
 import { checkDB } from '@/api/initdb'
 import bootomInfo from '@/view/layout/bottomInfo/bottomInfo.vue'
 import { reactive, ref } from 'vue'

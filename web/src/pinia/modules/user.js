@@ -1,4 +1,4 @@
-import { login, getUserInfo, setSelfInfo } from '@/api/user'
+import { login, getUserInfo, setSelfInfo } from '@/api/sysUser'
 import { jsonInBlacklist } from '@/api/jwt'
 import router from '@/router/index'
 import { ElLoading, ElMessage } from 'element-plus'
