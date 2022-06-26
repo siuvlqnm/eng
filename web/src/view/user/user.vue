@@ -31,10 +31,16 @@
         @selection-change="handleSelectionChange"
         >
         <el-table-column type="selection" width="55" />
-        <el-table-column align="left" label="日期" width="180">
-            <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
-        </el-table-column>
         <el-table-column align="left" label="会员名" prop="userName" width="120" />
+        <el-table-column align="left" label="手机号" prop="phone" width="120" />
+        <el-table-column align="left" label="会员等级" prop="registerPath" width="120" />
+        <el-table-column align="left" label="会员来源" prop="userLevel" width="120" />
+        <el-table-column align="left" label="注册时间" width="180">
+            <template #default="scope">{{ formatDate(scope.row.createdAt) }}</template>
+        </el-table-column>
+        <el-table-column align="left" label="入会时间" width="180">
+            <template #default="scope">{{ formatDate(scope.row.joinTime) }}</template>
+        </el-table-column>
         <el-table-column align="left" label="按钮组">
             <template #default="scope">
             <el-button type="primary" link icon="edit" size="small" class="table-button" @click="updateUserFunc(scope.row)">变更</el-button>
@@ -58,6 +64,9 @@
       <el-form :model="formData" label-position="right" label-width="80px">
         <el-form-item label="会员名:">
           <el-input v-model="formData.userName" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="手机号:">
+          <el-input v-model="formData.phone" clearable placeholder="请输入" />
         </el-form-item>
       </el-form>
       <template #footer>
