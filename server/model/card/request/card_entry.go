@@ -5,7 +5,12 @@ import (
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
 )
 
-type CardEntrySearch struct{
-    card.CardEntry
-    request.PageInfo
+type CardEntrySearch struct {
+	card.CardEntry
+	request.PageInfo
+}
+
+type CardEntryCreate struct {
+	card.CardEntry
+	card.CardEntrySpecs
 }

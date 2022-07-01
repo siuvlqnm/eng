@@ -31,10 +31,11 @@
         @selection-change="handleSelectionChange"
         >
         <el-table-column type="selection" width="55" />
-        <el-table-column align="left" label="日期" width="180">
-            <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
-        </el-table-column>
-        <el-table-column align="left" label="入场卡名称" prop="entryCardName" width="120" />
+        <el-table-column align="left" label="入场卡名称" prop="cardName" width="120" />
+        <el-table-column align="left" label="类型" prop="cardType" width="120" />
+        <el-table-column align="left" label="支持入场人数" prop="suptUserNr" width="120" />
+        <el-table-column align="left" label="有效期/有效次数" prop="timeGradient" width="120" />
+        <el-table-column align="left" label="售卖价格" prop="priceGradient" width="120" />
         <el-table-column align="left" label="按钮组">
             <template #default="scope">
             <el-button type="primary" link icon="edit" size="small" class="table-button" @click="updateCardEntryFunc(scope.row)">变更</el-button>
@@ -57,7 +58,46 @@
     <el-dialog v-model="dialogFormVisible" :before-close="closeDialog" title="弹窗操作">
       <el-form :model="formData" label-position="right" label-width="80px">
         <el-form-item label="入场卡名称:">
+          <el-input v-model="formData.cardName" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="入场卡类型:">
+          <el-input-number v-model="formData.cardType" clearable placeholder="1次卡，2期限卡" />
+        </el-form-item>
+        <el-form-item label="支持入场人数:">
+          <el-input-number v-model="formData.suptUserNr" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="入场次数:">
+          <el-input-number v-model="formData.validTime" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="售卖价格:">
+          <el-input-number v-model="formData.price" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="有效期:">
+          <el-input-number v-model="formData.validPeriod" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="日期单位:">
+          <el-input-number v-model="formData.dateUnit" clearable placeholder="1天，2月，3年" />
+        </el-form-item>
+        <el-form-item label="支持售卖时间:">
           <el-input v-model="formData.entryCardName" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="特别说明:">
+          <el-input v-model="formData.SpecialNote" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="卡介绍:">
+          <el-input v-model="formData.cardIntro" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="内部说明:">
+          <el-input v-model="formData.intIntro" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="转让设置:">
+          <el-input v-model="formData.isTransfer" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="允许冻结天数:">
+          <el-input-number v-model="formData.freezeAllow" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="允许赠送天数:">
+          <el-input-number v-model="formData.giftAllow" clearable placeholder="请输入" />
         </el-form-item>
       </el-form>
       <template #footer>
