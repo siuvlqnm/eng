@@ -5,12 +5,15 @@
       ref="fieldDialogFrom"
       :model="middleDate"
       label-width="120px"
-      label-position="left"
+      label-position="right"
       :rules="rules"
+      class="grid-form"
     >
       <el-form-item label="Field名称" prop="fieldName">
         <el-input v-model="middleDate.fieldName" autocomplete="off" style="width:80%" />
-        <el-button size="small" style="width:18%;margin-left:2%" @click="autoFill">自动填充</el-button>
+        <el-button size="small" style="width:18%;margin-left:2%" @click="autoFill">
+          <span style="font-size: 12px">自动填充</span>
+        </el-button>
       </el-form-item>
       <el-form-item label="Field中文名" prop="fieldDesc">
         <el-input v-model="middleDate.fieldDesc" autocomplete="off" />
@@ -59,7 +62,6 @@
           />
         </el-select>
       </el-form-item>
-
       <el-form-item label="关联字典" prop="dictType">
         <el-select
           v-model="middleDate.dictType"
@@ -76,12 +78,21 @@
           />
         </el-select>
       </el-form-item>
+      <el-form-item label="是否必填">
+        <el-switch v-model="middleDate.require" />
+      </el-form-item>
+      <el-form-item label="是否可清空">
+        <el-switch v-model="middleDate.clearable" />
+      </el-form-item>
+      <el-form-item label="校验失败文案">
+        <el-input v-model="middleDate.errorText" />
+      </el-form-item>
+
     </el-form>
   </div>
 </template>
 
 <script setup>
-
 import { toLowerCase, toSQLLine } from '@/utils/stringFun'
 import { getSysDictionaryList } from '@/api/sysDictionary'
 import WarningBar from '@/components/warningBar/warningBar.vue'
@@ -195,3 +206,15 @@ export default {
   name: 'FieldDialog'
 }
 </script>
+<style scoped>
+.grid-form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.click-text{
+  color: #0d84ff;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+}
+</style>
