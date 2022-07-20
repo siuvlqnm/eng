@@ -1,3 +1,13 @@
+zap:
+  level: 'info'
+  prefix: '[github.com/flipped-aurora/gin-vue-admin/server]'
+  format: 'console'
+  director: 'log'
+  encode-level: 'LowercaseColorLevelEncoder'
+  stacktrace-key: 'stacktrace'
+  max-age: 30 # 默认日志留存默认以天为单位
+  show-line: true
+  log-in-console: true
 aliyun-oss:
   endpoint: yourEndpoint
   access-key-id: yourAccessKeyId
