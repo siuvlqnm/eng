@@ -56,7 +56,7 @@
         </div>
     </div>
     <el-dialog v-model="dialogFormVisible" :before-close="closeDialog" title="弹窗操作">
-      <el-form :model="formData" label-position="right" label-width="80px">
+      <el-form :model="formData" label-position="right" label-width="100px">
         <el-form-item label="入场卡名称:">
           <el-input v-model="formData.cardName" clearable placeholder="请输入" />
         </el-form-item>
