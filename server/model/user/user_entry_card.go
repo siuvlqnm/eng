@@ -28,6 +28,9 @@ type UserEntryCard struct {
 	ContractNumber uuid.UUID `json:"contractNumber" gorm:"column:contract_number;not null;size:191;comment:合同编号;"`
 	TotalPrice     uint      `json:"totalPrice" gorm:"column:total_price;not null;default:0;comment:原价格;"`
 	PayPrice       uint      `json:"payPrice" form:"payPrice" gorm:"column:pay_price;not null;default:0;comment:实际支付价格;"`
+	ValidTime      uint16    `json:"validTime" gorm:"column:valid_time;not null;default:0;comment:有效次数;"`
+	ValidPeriod    uint16    `json:"validPeriod" gorm:"column:valid_period;not null;default:1;comment:有效期;"`
+	DateUnit       uint8     `json:"dateUnit" gorm:"column:date_unit;not null;default:1;comment:日期单位：1天，2月，3年;"`
 	StartTime      time.Time `json:"startTime" gorm:"column:start_time;type:timestamp;not null;comment:激活时间;"`
 	EndTime        time.Time `json:"endTime" gorm:"column:end_time;type:timestamp;not null;comment:到期时间;"`
 	Remark         string    `json:"remark" form:"remark" gorm:"column:remark;not null;comment:备注;"`

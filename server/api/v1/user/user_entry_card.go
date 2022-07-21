@@ -35,22 +35,35 @@ func (userEntryCardApi *UserEntryCardApi) CreateUserEntryCard(c *gin.Context) {
 	if uerr != nil && cerr != nil && cserr != nil {
 		global.GVA_LOG.Error("用户或卡项信息有误!", zap.Error(uerr))
 		response.FailWithMessage("用户或卡项信息有误", c)
-	} else {
-		uec.UserName = ui.UserName
-		uec.Phone = ui.Phone
-		uec.CardName = ci.CardName
-		uec.CardType = ci.CardType
-		uec.TotalPrice = ces.Price
-		uec.InitAmt = uint16(ces.ValidTime)
-
-		uec.ContractNumber = uuid.NewV4()
-
-		if err := userEntryCardService.CreateUserEntryCard(uec); err != nil {
-			global.GVA_LOG.Error("创建失败!", zap.Error(err))
-			response.FailWithMessage("创建失败", c)
-		} else {
-			response.OkWithMessage("创建成功", c)
+		return
+	}
+	uec.UserName = ui.UserName
+	uec.Phone = ui.Phone
+	uec.CardName = ci.CardName
+	uec.CardType = ci.CardType
+	uec.TotalPrice = ces.Price
+	var vt uint16
+	if ci.CardType == 2 {
+		switch ces.DateUnit {
+		case 1:
+			vt = ces.ValidPeriod
+		case 2:
+			vt = ces.ValidPeriod * 30
 		}
+	}
+	uec.InitAmt = vt
+	if uec.GiftAmt != 0 {
+		uec.TotalAmt = uec.GiftAmt + uec.InitAmt
+	} else {
+		uec.TotalAmt = uec.InitAmt
+	}
+	uec.ContractNumber = uuid.NewV4()
+
+	if err := userEntryCardService.CreateUserEntryCard(uec); err != nil {
+		global.GVA_LOG.Error("创建失败!", zap.Error(err))
+		response.FailWithMessage("创建失败", c)
+	} else {
+		response.OkWithMessage("创建成功", c)
 	}
 }
 
