@@ -18,8 +18,8 @@ type User struct {
 	UserLevel    uint8     `json:"userLevel" form:"userLevel" gorm:"column:user_level;not null;default:1;comment:会员等级：1潜在会员，2正式会员，3流失会员;"`
 	IsMinor      *bool     `json:"isMinor" form:"isMinor" gorm:"column:is_minor;not null;comment:1成年人、2未成年人;default:1;"`
 	Avatar       string    `json:"avatar" form:"avatar" gorm:"column:avatar;not null;comment:头像;size:191;"`
-	UserUuid     uuid.UUID `json:"userUuid" form:"userUuid" gorm:"column:user_uuid;not null;comment:用户UUID;size:191;"`
-	JoinTime     time.Time `json:"joinTime" form:"joinTime" gorm:"column:join_time;type:timestamp;not null;comment:入会时间;"`
+	UserUuid     uuid.UUID `json:"userUuid" gorm:"column:user_uuid;not null;comment:用户UUID;size:191;"`
+	JoinTime     time.Time `json:"joinTime" gorm:"column:join_time;type:timestamp;comment:入会时间;"`
 }
 
 // TableName User 表名
