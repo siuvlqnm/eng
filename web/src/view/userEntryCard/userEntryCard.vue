@@ -10,7 +10,7 @@
     </div>
     <div class="gva-table-box">
         <div class="gva-btn-list">
-            <el-button size="small" type="primary" icon="plus" @click="openDialog">新增</el-button>
+            <el-button size="small" type="primary" icon="plus" @click="openDialog">入场卡签单</el-button>
             <el-popover v-model:visible="deleteVisible" placement="top" width="160">
             <p>确定要删除吗？</p>
             <div style="text-align: right; margin-top: 8px;">
@@ -31,10 +31,19 @@
         @selection-change="handleSelectionChange"
         >
         <el-table-column type="selection" width="55" />
-        <el-table-column align="left" label="日期" width="180">
+        <el-table-column align="left" label="姓名" prop="userName" width="120" />
+        <el-table-column align="left" label="手机号" prop="phone" width="120" />
+        <el-table-column align="left" label="卡名称" prop="cardName" width="120" />
+        <el-table-column align="left" label="卡类型" prop="cardType" width="120" />
+        <el-table-column align="left" label="状态" prop="cardStat" width="120" />
+        <el-table-column align="left" label="总计额度" prop="totalAmt" width="120" />
+        <el-table-column align="left" label="赠送额度" prop="giftAmt" width="120" />
+        <el-table-column align="left" label="剩余额度" prop="surplusAmt" width="120" />
+        <el-table-column align="left" label="购买日期" width="180">
             <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
-        <el-table-column align="left" label="合同编号" prop="contractNumber" width="120" />
+        <el-table-column align="left" label="开卡" prop="isOpen" width="120" />
+        <el-table-column align="left" label="实收金额" prop="payPrice" width="120" />
         <el-table-column align="left" label="按钮组">
             <template #default="scope">
             <el-button type="primary" link icon="edit" size="small" class="table-button" @click="updateUserEntryCardFunc(scope.row)">变更</el-button>
@@ -105,7 +114,7 @@ import { ref, reactive } from 'vue'
 
 // 自动化生成的字典（可能为空）以及字段
 const formData = ref({
-        contractNumber: '',
+        remark: '',
         })
 
 // 验证规则
@@ -261,7 +270,7 @@ const openDialog = () => {
 const closeDialog = () => {
     dialogFormVisible.value = false
     formData.value = {
-        contractNumber: '',
+        remark: '',
         }
 }
 // 弹窗确定

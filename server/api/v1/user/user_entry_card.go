@@ -29,7 +29,6 @@ var userEntryCardService = service.ServiceGroupApp.UserServiceGroup.UserEntryCar
 func (userEntryCardApi *UserEntryCardApi) CreateUserEntryCard(c *gin.Context) {
 	var uec user.UserEntryCard
 	_ = c.ShouldBindJSON(&uec)
-
 	ui, uerr := userService.GetUser(uec.UserID)
 	ci, cerr := service.ServiceGroupApp.CardServiceGroup.GetCardEntry(uec.CardID)
 	ces, cserr := service.ServiceGroupApp.CardServiceGroup.GetCardEntrySpecs(uec.CardID)
