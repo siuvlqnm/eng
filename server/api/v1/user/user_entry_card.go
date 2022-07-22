@@ -62,7 +62,7 @@ func (userEntryCardApi *UserEntryCardApi) CreateUserEntryCard(c *gin.Context) {
 		uec.TotalAmt = uec.InitAmt
 	}
 	uec.ContractNumber = uuid.NewV4()
-
+	uec.SurplusAmt = uec.TotalAmt
 	if err := userEntryCardService.CreateUserEntryCard(uec); err != nil {
 		global.GVA_LOG.Error("创建失败!", zap.Error(err))
 		response.FailWithMessage("创建失败", c)
