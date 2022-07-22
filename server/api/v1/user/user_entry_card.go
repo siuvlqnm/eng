@@ -49,6 +49,8 @@ func (userEntryCardApi *UserEntryCardApi) CreateUserEntryCard(c *gin.Context) {
 			vt = ces.ValidPeriod
 		case 2:
 			vt = ces.ValidPeriod * 30
+		case 3:
+			vt = ces.ValidPeriod * 365
 		}
 	}
 	uec.InitAmt = vt
@@ -62,9 +64,9 @@ func (userEntryCardApi *UserEntryCardApi) CreateUserEntryCard(c *gin.Context) {
 	if err := userEntryCardService.CreateUserEntryCard(uec); err != nil {
 		global.GVA_LOG.Error("创建失败!", zap.Error(err))
 		response.FailWithMessage("创建失败", c)
-	} else {
-		response.OkWithMessage("创建成功", c)
+		return
 	}
+	response.OkWithMessage("创建成功", c)
 }
 
 // DeleteUserEntryCard 删除UserEntryCard

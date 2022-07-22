@@ -18,8 +18,8 @@ type CardEntry struct {
 	TimeGradient  string    `json:"timeGradient" form:"timeGradient" gorm:"column:time_gradient;not null;comment:时间区间;"`
 	CardStat      uint8     `json:"cardStat" form:"cardStat" gorm:"column:card_status;not null;default:1;comment:上架状态：1已上架可售，2已下架可售，3已下架停售;"`
 	SaleType      uint8     `json:"saleType" form:"saleType" gorm:"column:sale_type;not null;default:1;comment:售卖类型：1永久售卖，2限时售卖;"`
-	SaleStartTime time.Time `json:"saleStartTime" form:"saleStartTime" gorm:"column:sale_time_time;type:timestamp;not null;comment:售卖开始时间;"`
-	SaleEndTime   time.Time `json:"saleEndTime" form:"saleEndTime" gorm:"column:sale_end_time;type:timestamp;not null;comment:售卖结束时间;"`
+	SaleStartTime time.Time `json:"saleStartTime" form:"saleStartTime" gorm:"column:sale_start_time;type:timestamp;comment:售卖开始时间;"`
+	SaleEndTime   time.Time `json:"saleEndTime" form:"saleEndTime" gorm:"column:sale_end_time;type:timestamp;comment:售卖结束时间;"`
 	IsTransfer    uint8     `json:"isTransfer" form:"isTransfer" gorm:"column:is_transfer;not null;default:0;comment:是否支持转让;"`
 	TransferFee   uint      `json:"transferFee" form:"transferFee" gorm:"column:transfer_fee;not null;comment:转让费用;"`
 	TransferUnit  uint8     `json:"transferUnit" form:"transferUnit" gorm:"column:transfer_unit;not null;default:1;comment:转让计算单位：1元，2百分比;"`
