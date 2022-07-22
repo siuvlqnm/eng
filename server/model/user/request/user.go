@@ -9,8 +9,3 @@ type UserSearch struct {
 	user.User
 	request.PageInfo
 }
-
-type UserCreate struct {
-	UserName string `form:"userName"`
-	Phone    string `form:"phone"`
-}

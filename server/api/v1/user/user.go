@@ -27,18 +27,15 @@ var userService = service.ServiceGroupApp.UserServiceGroup.UserService
 // @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
 // @Router /user/createUser [post]
 func (userApi *UserApi) CreateUser(c *gin.Context) {
-	var ur userReq.UserCreate
-	_ = c.ShouldBindJSON(&ur)
 	var u user.User
-	u.UserName = ur.UserName
-	u.Phone = ur.Phone
+	_ = c.ShouldBindJSON(&u)
 	u.UserUuid = uuid.NewV4()
 	if err := userService.CreateUser(u); err != nil {
 		global.GVA_LOG.Error("创建失败!", zap.Error(err))
 		response.FailWithMessage("创建失败", c)
-	} else {
-		response.OkWithMessage("创建成功", c)
+		return
 	}
+	response.OkWithMessage("创建成功", c)
 }
 
 // DeleteUser 删除User
