@@ -29,6 +29,8 @@ var ces = service.ServiceGroupApp.CardServiceGroup.CardEntrySpecsService
 func (i *CardEntryApi) CreateCardEntry(c *gin.Context) {
 	var ce cardReq.CardEntryCreate
 	_ = c.ShouldBindJSON(&ce)
+	ce.PriceGradient = ce.Price
+	ce.TimeGradient = ce.ValidTime
 	if cardId, err := s.CreateCardEntry(ce); err != nil {
 		global.GVA_LOG.Error("创建失败!", zap.Error(err))
 		response.FailWithMessage("创建失败", c)

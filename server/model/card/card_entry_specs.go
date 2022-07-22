@@ -5,7 +5,7 @@ import "github.com/flipped-aurora/gin-vue-admin/server/global"
 type CardEntrySpecs struct {
 	global.GVA_MODEL
 	CardEntryId uint   `gorm:"column:card_entry_id;not null;comment:入场卡ID;"`
-	Price       uint   `json:"price" form:"price" gorm:"column:price;not null;default:0;comment:价格;"`
+	Price       uint16 `json:"price" form:"price" gorm:"column:price;not null;default:0;comment:价格;"`
 	ValidTime   uint16 `json:"validTime" form:"validTime" gorm:"column:valid_time;not null;default:0;comment:有效次数;"`
 	ValidPeriod uint16 `json:"validPeriod" form:"validPeriod" gorm:"column:valid_period;not null;default:1;comment:有效期;"`
 	DateUnit    uint8  `json:"dateUnit" form:"dateUnit" gorm:"column:date_unit;not null;default:1;comment:日期单位：1天，2月，3年;"`
