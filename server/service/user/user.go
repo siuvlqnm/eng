@@ -1,6 +1,8 @@
 package user
 
 import (
+	"time"
+
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/user"
@@ -16,6 +18,15 @@ type UserService struct {
 func (userService *UserService) CreateUser(user user.User) (err error) {
 	err = global.GVA_DB.Create(&user).Error
 	return err
+}
+
+func (us *UserService) UpdateUserBeforeBuyCard(id uint) (err error) {
+	var u *user.User
+	upDateMap := make(map[string]interface{}, 2)
+	upDateMap["join_time"] = time.Now()
+	upDateMap["user_level"] = 2
+	err = global.GVA_DB.Model(&u).Where("id = ? and user_level <> 2", id).Updates(upDateMap).Error
+	return
 }
 
 // DeleteUser 删除User记录

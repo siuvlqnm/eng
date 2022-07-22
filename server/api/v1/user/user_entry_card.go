@@ -42,18 +42,20 @@ func (userEntryCardApi *UserEntryCardApi) CreateUserEntryCard(c *gin.Context) {
 	uec.CardName = ci.CardName
 	uec.CardType = ci.CardType
 	uec.TotalPrice = ces.Price
-	var vt uint16
+
 	if ci.CardType == 2 {
 		switch ces.DateUnit {
 		case 1:
-			vt = ces.ValidPeriod
+			uec.InitAmt = ces.ValidPeriod
 		case 2:
-			vt = ces.ValidPeriod * 30
+			uec.InitAmt = ces.ValidPeriod * 30
 		case 3:
-			vt = ces.ValidPeriod * 365
+			uec.InitAmt = ces.ValidPeriod * 365
 		}
+	} else {
+		uec.InitAmt = ces.ValidTime
 	}
-	uec.InitAmt = vt
+
 	if uec.GiftAmt != 0 {
 		uec.TotalAmt = uec.GiftAmt + uec.InitAmt
 	} else {
@@ -66,6 +68,7 @@ func (userEntryCardApi *UserEntryCardApi) CreateUserEntryCard(c *gin.Context) {
 		response.FailWithMessage("创建失败", c)
 		return
 	}
+	userService.UpdateUserBeforeBuyCard(uec.UserID)
 	response.OkWithMessage("创建成功", c)
 }
 

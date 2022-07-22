@@ -33,8 +33,8 @@
         <el-table-column type="selection" width="55" />
         <el-table-column align="left" label="会员名" prop="userName" width="120" />
         <el-table-column align="left" label="手机号" prop="phone" width="120" />
-        <el-table-column align="left" label="会员等级" prop="registerPath" width="120" />
-        <el-table-column align="left" label="会员来源" prop="userLevel" width="120" />
+        <el-table-column align="left" label="会员等级" prop="userLevel" width="120" />
+        <el-table-column align="left" label="会员来源" prop="registerPath" width="120" />
         <el-table-column align="left" label="注册时间" width="180">
             <template #default="scope">{{ formatDate(scope.row.createdAt) }}</template>
         </el-table-column>
