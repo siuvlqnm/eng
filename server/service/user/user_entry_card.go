@@ -64,37 +64,27 @@ func (userEntryCardService *UserEntryCardService) GetUserEntryCardInfoList(info 
 	return userEntryCards, total, err
 }
 
-func (s *UserEntryCardService) SuccEntry(usc user.UserEntryCard) {
-	if usc.CardType == 2 && usc.IsOpen == 1 {
-		return
-	}
-	if usc.CardType == 1 && usc.IsOpen == 1 && usc.SurplusAmt == 0 {
-		return
-	}
-
-	if usc.IsOpen == 0 {
+func (s *UserEntryCardService) SuccEntry(uec *user.UserEntryCard) {
+	if uec.IsOpen == 0 {
 		var st = time.Now()
 		var et = st
 		var d int
-		switch usc.DateUnit {
+		switch uec.DateUnit {
 		case 1:
-			d = int(usc.ValidPeriod)
+			d = int(uec.ValidPeriod)
 		case 2:
-			d = int(usc.ValidPeriod) * 30
+			d = int(uec.ValidPeriod) * 30
 		case 3:
-			d = int(usc.ValidPeriod) * 365
+			d = int(uec.ValidPeriod) * 365
 		}
 		et = st.AddDate(0, 0, d)
-		usc.IsOpen = 1
-		usc.StartTime = &st
-		usc.EndTime = &et
+		uec.IsOpen = 1
+		uec.StartTime = &st
+		uec.EndTime = &et
 	} else {
-		if usc.SurplusAmt == 1 {
-			usc.CardStat = 5
+		if uec.SurplusAmt == 0 {
+			uec.CardStat = 5
 		}
 	}
-	if usc.CardType == 1 {
-		usc.SurplusAmt--
-	}
-	global.GVA_DB.Where("id = ?", usc.ID).Updates(&usc)
+	global.GVA_DB.Select("*").Updates(&uec)
 }

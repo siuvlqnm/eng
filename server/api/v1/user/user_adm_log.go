@@ -29,12 +29,16 @@ func (userAdmLogApi *UserAdmLogApi) CreateUserAdmLog(c *gin.Context) {
 	var ual user.UserAdmLog
 	_ = c.ShouldBindJSON(&ual)
 
+	ueci, _ := userEntryCardService.GetUserEntryCard(ual.UserCardID)
+	ual.CardName = ueci.CardName
+	if ual.DeductNum > uint8(ueci.SurplusAmt) {
+		response.FailWithMessage("剩余次数不足", c)
+		return
+	}
+
 	ui, _ := userService.GetUser(ual.UserID)
 	ual.UserName = ui.UserName
 	ual.Phone = ui.Phone
-
-	ueci, _ := userEntryCardService.GetUserEntryCard(ual.UserCardID)
-	ual.CardName = ueci.CardName
 
 	if err := userAdmLogService.CreateUserAdmLog(ual); err != nil {
 		global.GVA_LOG.Error("入场失败!", zap.Error(err))
@@ -42,7 +46,16 @@ func (userAdmLogApi *UserAdmLogApi) CreateUserAdmLog(c *gin.Context) {
 		return
 	}
 
-	userEntryCardService.SuccEntry(ueci)
+	if ueci.CardType == 2 && ueci.IsOpen == 1 {
+		return
+	}
+	if ueci.CardType == 1 && ueci.IsOpen == 1 && ueci.SurplusAmt == 0 {
+		return
+	}
+	if ueci.CardType == 1 {
+		ueci.SurplusAmt -= uint16(ual.DeductNum)
+	}
+	userEntryCardService.SuccEntry(&ueci)
 	response.OkWithMessage("入场成功", c)
 }
 
