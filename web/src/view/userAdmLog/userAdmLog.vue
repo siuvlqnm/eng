@@ -32,7 +32,7 @@
         >
         <el-table-column type="selection" width="55" />
         <el-table-column align="left" label="会员名称" prop="userName" width="120" />
-        <el-table-column align="left" label="会员名称" prop="userName" width="120" />
+        <el-table-column align="left" label="手机号" prop="phone" width="120" />
         <el-table-column align="left" label="入场凭证" prop="cardName" width="120" />
         <el-table-column align="left" label="入场入场类型" prop="entryType" width="120" />
         <el-table-column align="left" label="扣除额度" prop="deductNum" width="120" />
