@@ -1,6 +1,8 @@
 package user
 
 import (
+	"time"
+
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/request"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/common/response"
@@ -71,7 +73,13 @@ func (userAdmLogApi *UserAdmLogApi) CreateUserAdmLog(c *gin.Context) {
 func (userAdmLogApi *UserAdmLogApi) DeleteUserAdmLog(c *gin.Context) {
 	var userAdmLog user.UserAdmLog
 	_ = c.ShouldBindJSON(&userAdmLog)
-	if err := userAdmLogService.DeleteUserAdmLog(userAdmLog); err != nil {
+
+	uali, _ := userAdmLogService.GetUserAdmLog(userAdmLog.ID)
+	var t = time.Now()
+	uali.LeaveTime = &t
+	uali.TotalTime = uint16(t.Sub(uali.CreatedAt).Minutes())
+
+	if err := userAdmLogService.UpdateUserAdmLog(uali); err != nil {
 		global.GVA_LOG.Error("删除失败!", zap.Error(err))
 		response.FailWithMessage("删除失败", c)
 	} else {

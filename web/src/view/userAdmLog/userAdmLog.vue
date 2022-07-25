@@ -12,13 +12,13 @@
         <div class="gva-btn-list">
             <el-button size="small" type="primary" icon="plus" @click="openDialog">入场</el-button>
             <el-popover v-model:visible="deleteVisible" placement="top" width="160">
-            <p>确定要删除吗？</p>
+            <p>确定要离场吗？</p>
             <div style="text-align: right; margin-top: 8px;">
                 <el-button size="small" type="primary" link @click="deleteVisible = false">取消</el-button>
                 <el-button size="small" type="primary" @click="onDelete">确定</el-button>
             </div>
             <template #reference>
-                <el-button icon="delete" size="small" style="margin-left: 10px;" :disabled="!multipleSelection.length" @click="deleteVisible = true">删除</el-button>
+                <el-button icon="delete" size="small" style="margin-left: 10px;" :disabled="!multipleSelection.length" @click="deleteVisible = true">离场</el-button>
             </template>
             </el-popover>
         </div>
@@ -46,7 +46,7 @@
         <el-table-column align="left" label="按钮组">
             <template #default="scope">
             <el-button type="primary" link icon="edit" size="small" class="table-button" @click="updateUserAdmLogFunc(scope.row)">变更</el-button>
-            <el-button type="primary" link icon="delete" size="small" @click="deleteRow(scope.row)">删除</el-button>
+            <el-button type="primary" link icon="delete" size="small" @click="deleteRow(scope.row)">离场</el-button>
             </template>
         </el-table-column>
         </el-table>
@@ -183,7 +183,7 @@ const handleSelectionChange = (val) => {
 
 // 删除行
 const deleteRow = (row) => {
-    ElMessageBox.confirm('确定要删除吗?', '提示', {
+    ElMessageBox.confirm('确定要离场吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
